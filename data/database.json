@@ -1,0 +1,1134 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "sabiborhosain@gmail.com",
+      "password_hash": "$2b$10$Ca1REzcAD361CHe99dIY7e8uLQ8DJX6RVcDLvbC18pGios4bAm8Yq",
+      "role": "SUPER_ADMIN",
+      "status": "ACTIVE",
+      "is_email_verified": 1,
+      "must_change_password": 1,
+      "last_login_at": "2026-09-27T12:56:13.311Z",
+      "created_at": "2026-09-26T13:53:55.612Z",
+      "updated_at": "2026-09-26T13:53:55.612Z"
+    },
+    {
+      "id": 2,
+      "email": "alex.coder@devsphere.io",
+      "password_hash": "$2b$10$Ca1REzcAD361CHe99dIY7e8uLQ8DJX6RVcDLvbC18pGios4bAm8Yq",
+      "role": "USER",
+      "status": "ACTIVE",
+      "is_email_verified": 1,
+      "must_change_password": 0,
+      "last_login_at": "2026-09-27T13:12:21.806Z",
+      "created_at": "2026-09-26T13:53:55.612Z",
+      "updated_at": "2026-09-26T13:53:55.612Z"
+    },
+    {
+      "id": 3,
+      "email": "sarah.engineer@devsphere.io",
+      "password_hash": "$2b$10$Ca1REzcAD361CHe99dIY7e8uLQ8DJX6RVcDLvbC18pGios4bAm8Yq",
+      "role": "USER",
+      "status": "ACTIVE",
+      "is_email_verified": 1,
+      "must_change_password": 0,
+      "last_login_at": "2026-09-27T13:12:38.654Z",
+      "created_at": "2026-09-26T13:53:55.612Z",
+      "updated_at": "2026-09-26T13:53:55.612Z"
+    }
+  ],
+  "user_profiles": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "username": "sabiborhosain",
+      "full_name": "Sabibor Hosain",
+      "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+      "bio": "Platform Founder & Lead Architect at DevSphere. Passionate about high-throughput distributed systems, React, and MySQL.",
+      "location": "San Francisco, CA",
+      "website": "https://devsphere.social",
+      "work": "Chief Technology Officer",
+      "education": "Computer Science M.S.",
+      "gender": "Male",
+      "followers_count": 1420,
+      "following_count": 18,
+      "friends_count": 321,
+      "posts_count": 5,
+      "created_at": "2026-09-26T13:53:55.612Z",
+      "updated_at": "2026-09-26T13:53:55.612Z"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "username": "alex_dev",
+      "full_name": "Alex Vance",
+      "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
+      "bio": "Full-stack TypeScript developer & Rust enthusiast. Writing clean code and building scalable cloud microservices.",
+      "location": "Austin, TX",
+      "website": "https://alexvance.codes",
+      "work": "Senior Software Engineer",
+      "education": "B.S. Software Engineering",
+      "gender": "Male",
+      "followers_count": 890,
+      "following_count": 142,
+      "friends_count": 211,
+      "posts_count": 8,
+      "created_at": "2026-09-26T13:53:55.612Z",
+      "updated_at": "2026-09-26T13:53:55.612Z"
+    },
+    {
+      "id": 3,
+      "user_id": 3,
+      "username": "sarah_tech",
+      "full_name": "Sarah Connor",
+      "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+      "bio": "DevOps & Cloud Architect. Kubernetes, Docker, Cloudflare R2, and Terraform advocate.",
+      "location": "Seattle, WA",
+      "website": "https://cloudsarah.io",
+      "work": "Principal Cloud Architect",
+      "education": "M.Sc. Information Security",
+      "gender": "Female",
+      "followers_count": 1120,
+      "following_count": 95,
+      "friends_count": 182,
+      "posts_count": 12,
+      "created_at": "2026-09-26T13:53:55.612Z",
+      "updated_at": "2026-09-26T13:53:55.612Z"
+    }
+  ],
+  "user_settings": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "theme": "light",
+      "email_notifications": 1,
+      "sound_enabled": 1,
+      "code_theme": "vivid-dark"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "theme": "light",
+      "email_notifications": 1,
+      "sound_enabled": 1,
+      "code_theme": "vivid-dark"
+    },
+    {
+      "id": 3,
+      "user_id": 3,
+      "theme": "light",
+      "email_notifications": 1,
+      "sound_enabled": 1,
+      "code_theme": "vivid-dark"
+    }
+  ],
+  "privacy_settings": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "who_can_see_posts": "PUBLIC",
+      "who_can_send_requests": "EVERYONE",
+      "who_can_see_friends": "PUBLIC"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "who_can_see_posts": "PUBLIC",
+      "who_can_send_requests": "EVERYONE",
+      "who_can_see_friends": "PUBLIC"
+    },
+    {
+      "id": 3,
+      "user_id": 3,
+      "who_can_see_posts": "PUBLIC",
+      "who_can_send_requests": "EVERYONE",
+      "who_can_see_friends": "PUBLIC"
+    }
+  ],
+  "pages": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "name": "TypeScript Architects",
+      "slug": "typescript-architects",
+      "description": "The official community for TypeScript design patterns, strict mode practices, and advanced type gymnastics.",
+      "category": "Technology",
+      "avatar_url": "https://images.unsplash.com/photo-1516116211227-bbc3e617d59b?auto=format&fit=crop&w=400&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+      "website": "https://typescriptlang.org",
+      "phone": "+1 415 555 0192",
+      "email": "community@typescriptarchitects.org",
+      "location": "Global / Remote",
+      "followers_count": 5420,
+      "is_verified": 1,
+      "created_at": "2026-09-26T13:53:55.612Z"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "name": "Cloud & DevOps Masters",
+      "slug": "cloud-devops-masters",
+      "description": "Deep dives into AWS, Cloudflare R2, Docker, CI/CD pipelines, and high availability hosting.",
+      "category": "Community",
+      "avatar_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
+      "website": "https://devopsmasters.io",
+      "phone": "+1 512 555 0148",
+      "email": "hello@devopsmasters.io",
+      "location": "Austin, TX",
+      "followers_count": 3810,
+      "is_verified": 1,
+      "created_at": "2026-09-26T13:53:55.612Z"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "page_id": null,
+      "post_type": "MIXED",
+      "privacy": "PUBLIC",
+      "content": "Welcome to DevSphere! We are thrilled to launch this complete, production-ready developer social platform. Here is how our block-based post architecture cleanly separates code execution, formatting, and responsive viewing:",
+      "location_name": "DevSphere HQ, Silicon Valley",
+      "feeling_emoji": "🚀",
+      "feeling_text": "excited",
+      "reactions_count": 42,
+      "comments_count": 6,
+      "shares_count": 14,
+      "views_count": 240,
+      "is_pinned": 1,
+      "is_deleted": 0,
+      "created_at": "2026-09-26T11:53:55.613Z",
+      "updated_at": "2026-09-26T11:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "page_id": null,
+      "post_type": "CODE",
+      "privacy": "PUBLIC",
+      "content": "Check out this clean TypeScript utility for verifying RSA-signed JWT payloads with fallback token rotation. What do you think about this pattern?",
+      "location_name": "Austin Tech District",
+      "feeling_emoji": "💡",
+      "feeling_text": "thoughtful",
+      "reactions_count": 19,
+      "comments_count": 3,
+      "shares_count": 5,
+      "views_count": 180,
+      "is_pinned": 0,
+      "is_deleted": 0,
+      "created_at": "2026-09-26T12:53:55.613Z",
+      "updated_at": "2026-09-26T12:53:55.613Z"
+    }
+  ],
+  "post_blocks": [
+    {
+      "id": 1,
+      "post_id": 1,
+      "block_order": 0,
+      "block_type": "TEXT",
+      "content": "DevSphere empowers developers and engineers to share rich multimedia thoughts, interactive code snippets with syntax highlighting, and architecture deep dives.",
+      "meta_json": null
+    },
+    {
+      "id": 2,
+      "post_id": 1,
+      "block_order": 1,
+      "block_type": "CODE",
+      "content": "/**\n * Enterprise Resilient Database Connection Pool\n * Supports seamless MySQL connection with automatic failover fallback\n */\nimport mysql from \"mysql2/promise\";\n\nexport async function createConnectionPool() {\n  return mysql.createPool({\n    host: process.env.DB_HOST || \"localhost\",\n    user: process.env.DB_USER || \"root\",\n    password: process.env.DB_PASSWORD || \"\",\n    database: process.env.DB_NAME || \"devsphere_db\",\n    waitForConnections: true,\n    connectionLimit: 20,\n    queueLimit: 0\n  });\n}",
+      "meta_json": {
+        "language": "typescript",
+        "title": "db-pool.ts"
+      }
+    },
+    {
+      "id": 3,
+      "post_id": 1,
+      "block_order": 2,
+      "block_type": "TEXT",
+      "content": "Every code block supports one-click copying, line numbering, and syntax highlighting for 20+ languages including TypeScript, Python, Go, and SQL.",
+      "meta_json": null
+    },
+    {
+      "id": 4,
+      "post_id": 2,
+      "block_order": 0,
+      "block_type": "TEXT",
+      "content": "Here is the token validation function with strict payload parsing:",
+      "meta_json": null
+    },
+    {
+      "id": 5,
+      "post_id": 2,
+      "block_order": 1,
+      "block_type": "CODE",
+      "content": "import jwt from \"jsonwebtoken\";\n\ninterface TokenPayload {\n  userId: number;\n  email: string;\n  role: \"USER\" | \"ADMIN\" | \"SUPER_ADMIN\";\n}\n\nexport function verifyUserToken(token: string): TokenPayload | null {\n  try {\n    return jwt.verify(token, process.env.JWT_SECRET!) as TokenPayload;\n  } catch (err) {\n    return null;\n  }\n}",
+      "meta_json": {
+        "language": "typescript",
+        "title": "verifyToken.ts"
+      }
+    }
+  ],
+  "post_reactions": [
+    {
+      "id": 1,
+      "post_id": 1,
+      "user_id": 2,
+      "reaction_type": "CODE",
+      "created_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "post_id": 1,
+      "user_id": 3,
+      "reaction_type": "LOVE",
+      "created_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 3,
+      "post_id": 2,
+      "user_id": 1,
+      "reaction_type": "LIKE",
+      "created_at": "2026-09-26T13:53:55.613Z"
+    }
+  ],
+  "saved_posts": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "post_id": 2,
+      "created_at": "2026-09-26T13:53:55.613Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "post_id": 1,
+      "user_id": 2,
+      "parent_id": null,
+      "content": "The block-based post architecture is super clean! Here is an example of calling it from our React frontend hook:",
+      "code_snippet": "const { data, loading } = useFeed({\n  cursor: 0,\n  limit: 10\n});",
+      "code_language": "typescript",
+      "image_url": null,
+      "likes_count": 4,
+      "is_deleted": 0,
+      "created_at": "2026-09-26T12:23:55.613Z"
+    },
+    {
+      "id": 2,
+      "post_id": 1,
+      "user_id": 3,
+      "parent_id": null,
+      "content": "Great job team! Cloudflare R2 integration makes storing high-resolution photos and video reels fast and affordable.",
+      "code_snippet": null,
+      "code_language": null,
+      "image_url": null,
+      "likes_count": 2,
+      "is_deleted": 0,
+      "created_at": "2026-09-26T13:08:55.613Z"
+    }
+  ],
+  "comment_reactions": [
+    {
+      "id": 1,
+      "comment_id": 1,
+      "user_id": 1,
+      "reaction_type": "LIKE",
+      "created_at": "2026-09-26T13:53:55.613Z"
+    }
+  ],
+  "stories": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "media_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
+      "media_type": "IMAGE",
+      "text_content": "Shipping DevSphere v1.0.0 today! 🎉",
+      "background_color": "#0f172a",
+      "views_count": 142,
+      "expires_at": "2026-09-27T11:53:55.613Z",
+      "is_deleted": 0,
+      "created_at": "2026-09-26T11:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "media_url": null,
+      "media_type": "TEXT",
+      "text_content": "Migrating our distributed cache to Redis v7 tomorrow morning at 04:00 UTC.",
+      "background_color": "#1e3a8a",
+      "views_count": 88,
+      "expires_at": "2026-09-27T09:53:55.613Z",
+      "is_deleted": 0,
+      "created_at": "2026-09-26T09:53:55.613Z"
+    }
+  ],
+  "story_views": [
+    {
+      "id": 1,
+      "story_id": 1,
+      "user_id": 2,
+      "viewed_at": "2026-09-26T13:53:55.613Z"
+    }
+  ],
+  "videos": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "title": "5 TypeScript Tips in 60 Seconds",
+      "description": "Level up your type safety with satisfies operator, const assertions, and branded types!",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
+      "duration": 58,
+      "views_count": 2340,
+      "likes_count": 189,
+      "comments_count": 12,
+      "storage_type": "LOCAL",
+      "is_short": 1,
+      "is_deleted": 0,
+      "created_at": "2026-09-26T07:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "title": "Building Cloudflare R2 Media Pipelines with Node.js",
+      "description": "Comprehensive guide to generating signed PUT URLs and direct client-side uploads with zero backend bandwidth load.",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "thumbnail_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
+      "duration": 720,
+      "views_count": 1250,
+      "likes_count": 94,
+      "comments_count": 7,
+      "storage_type": "LOCAL",
+      "is_short": 0,
+      "is_deleted": 0,
+      "created_at": "2026-09-26T01:53:55.613Z"
+    }
+  ],
+  "video_reactions": [
+    {
+      "id": 1,
+      "video_id": 1,
+      "user_id": 2,
+      "reaction_type": "LIKE",
+      "created_at": "2026-09-26T13:53:55.613Z"
+    }
+  ],
+  "followers": [
+    {
+      "id": 1,
+      "follower_id": 2,
+      "following_id": 1,
+      "created_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "follower_id": 3,
+      "following_id": 1,
+      "created_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 3,
+      "follower_id": 1,
+      "following_id": 2,
+      "created_at": "2026-09-26T13:53:55.613Z"
+    }
+  ],
+  "page_followers": [
+    {
+      "id": 1,
+      "page_id": 1,
+      "user_id": 1,
+      "created_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "page_id": 1,
+      "user_id": 2,
+      "created_at": "2026-09-26T13:53:55.613Z"
+    }
+  ],
+  "reports": [
+    {
+      "id": 1,
+      "reporter_id": 2,
+      "reported_type": "POST",
+      "reported_id": 2,
+      "reason": "SPAM",
+      "details": "Automated test report checking admin moderation queue.",
+      "status": "PENDING",
+      "moderator_id": null,
+      "moderator_notes": null,
+      "created_at": "2026-09-26T13:23:55.613Z",
+      "updated_at": "2026-09-26T13:23:55.613Z"
+    }
+  ],
+  "admin_logs": [
+    {
+      "id": 1,
+      "admin_id": 1,
+      "action": "SYSTEM_INITIALIZED",
+      "target_type": "SYSTEM",
+      "target_id": 1,
+      "ip_address": "127.0.0.1",
+      "details": "DevSphere platform database seeded with super administrator.",
+      "created_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "admin_id": 1,
+      "action": "UPDATE_R2_SETTINGS",
+      "target_type": "SETTINGS",
+      "target_id": 1,
+      "ip_address": "127.0.0.1",
+      "details": "Cloudflare R2 configuration updated. Active: 1",
+      "created_at": "2026-09-26T13:58:06.903Z"
+    },
+    {
+      "id": 3,
+      "admin_id": 1,
+      "action": "UPDATE_SMTP_SETTINGS",
+      "target_type": "SETTINGS",
+      "target_id": 1,
+      "ip_address": "127.0.0.1",
+      "details": "SMTP email configuration updated.",
+      "created_at": "2026-09-26T13:58:07.003Z"
+    },
+    {
+      "id": 4,
+      "admin_id": 1,
+      "action": "UPDATE_R2_SETTINGS",
+      "target_type": "SETTINGS",
+      "target_id": 1,
+      "ip_address": "127.0.0.1",
+      "details": "Cloudflare R2 configuration updated and encrypted. Active: 1",
+      "created_at": "2026-09-26T13:58:28.464Z"
+    },
+    {
+      "id": 5,
+      "admin_id": 1,
+      "action": "UPDATE_SMTP_SETTINGS",
+      "target_type": "SETTINGS",
+      "target_id": 1,
+      "ip_address": "127.0.0.1",
+      "details": "SMTP email configuration updated and encrypted.",
+      "created_at": "2026-09-26T13:58:28.472Z"
+    },
+    {
+      "id": 6,
+      "admin_id": 1,
+      "action": "UPDATE_R2_SETTINGS",
+      "target_type": "SETTINGS",
+      "target_id": 1,
+      "ip_address": "127.0.0.1",
+      "details": "Cloudflare R2 configuration updated and encrypted. Active: 1",
+      "created_at": "2026-09-26T13:58:45.069Z"
+    }
+  ],
+  "login_logs": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "email": "sabiborhosain@gmail.com",
+      "ip_address": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "status": "SUCCESS",
+      "created_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "email": "sabiborhosain@gmail.com",
+      "ip_address": "127.0.0.1",
+      "user_agent": "curl/7.88.1",
+      "status": "SUCCESS",
+      "created_at": "2026-09-26T13:57:56.856Z"
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "email": "sabiborhosain@gmail.com",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-26T13:58:06.857Z"
+    },
+    {
+      "id": 4,
+      "user_id": 1,
+      "email": "sabiborhosain@gmail.com",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-26T13:58:28.444Z"
+    },
+    {
+      "id": 5,
+      "user_id": 1,
+      "email": "sabiborhosain@gmail.com",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-26T13:58:34.111Z"
+    },
+    {
+      "id": 6,
+      "user_id": 1,
+      "email": "sabiborhosain@gmail.com",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-26T13:58:45.052Z"
+    },
+    {
+      "id": 7,
+      "user_id": 1,
+      "email": "sabiborhosain@gmail.com",
+      "ip_address": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+      "status": "SUCCESS",
+      "created_at": "2026-09-27T12:56:13.316Z"
+    },
+    {
+      "id": 8,
+      "user_id": 2,
+      "email": "alex.coder@devsphere.io",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "FAILED",
+      "created_at": "2026-09-27T13:12:00.218Z"
+    },
+    {
+      "id": 9,
+      "user_id": 2,
+      "email": "alex.coder@devsphere.io",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-27T13:12:04.660Z"
+    },
+    {
+      "id": 10,
+      "user_id": 2,
+      "email": "alex.coder@devsphere.io",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-27T13:12:09.584Z"
+    },
+    {
+      "id": 11,
+      "user_id": 2,
+      "email": "alex.coder@devsphere.io",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-27T13:12:13.682Z"
+    },
+    {
+      "id": 12,
+      "user_id": 2,
+      "email": "alex.coder@devsphere.io",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-27T13:12:21.806Z"
+    },
+    {
+      "id": 13,
+      "user_id": null,
+      "email": "sarah.dev@devsphere.io",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "FAILED",
+      "created_at": "2026-09-27T13:12:27.988Z"
+    },
+    {
+      "id": 14,
+      "user_id": 3,
+      "email": "sarah.engineer@devsphere.io",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "status": "SUCCESS",
+      "created_at": "2026-09-27T13:12:38.655Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "token": "seed-session-token-1",
+      "ip_address": "127.0.0.1",
+      "user_agent": "Chrome 122 on Windows",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-26T13:53:55.613Z",
+      "created_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic2FiaWJvcmhvc2FpbkBnbWFpbC5jb20iLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJpYXQiOjE3OTA0MzEwNzYsImV4cCI6MTc5MTAzNTg3Nn0.uZhbliW_FargLI8jJkUTCPeibPogE_qxG41CUbNGd4M",
+      "ip_address": "127.0.0.1",
+      "user_agent": "curl/7.88.1",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-26T13:57:56.856Z",
+      "created_at": "2026-09-26T13:57:56.856Z"
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic2FiaWJvcmhvc2FpbkBnbWFpbC5jb20iLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJpYXQiOjE3OTA0MzEwODYsImV4cCI6MTc5MTAzNTg4Nn0.SzCBzSjJ4pTX_u3HYP9z6gqD_1tXeabyGLKlXUwMPtI",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-26T13:58:06.857Z",
+      "created_at": "2026-09-26T13:58:06.857Z"
+    },
+    {
+      "id": 4,
+      "user_id": 1,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic2FiaWJvcmhvc2FpbkBnbWFpbC5jb20iLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJpYXQiOjE3OTA0MzExMDgsImV4cCI6MTc5MTAzNTkwOH0.E0BAdpRLBECDU2sqgzf8Tqx3umSw5H0yGe0MqSK7ylo",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-26T13:58:28.444Z",
+      "created_at": "2026-09-26T13:58:28.444Z"
+    },
+    {
+      "id": 5,
+      "user_id": 1,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic2FiaWJvcmhvc2FpbkBnbWFpbC5jb20iLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJpYXQiOjE3OTA0MzExMTQsImV4cCI6MTc5MTAzNTkxNH0.RzqAJEAMsXBsTMa8cFI-RQvQd7_pqmsorpmqlC1d3lc",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-26T13:58:34.111Z",
+      "created_at": "2026-09-26T13:58:34.111Z"
+    },
+    {
+      "id": 6,
+      "user_id": 1,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic2FiaWJvcmhvc2FpbkBnbWFpbC5jb20iLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJpYXQiOjE3OTA0MzExMjUsImV4cCI6MTc5MTAzNTkyNX0.7NATMXai4rBxLXw6u6gTPWTAP5HT6fJt_ySOfgpzWNA",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-26T13:58:45.052Z",
+      "created_at": "2026-09-26T13:58:45.052Z"
+    },
+    {
+      "id": 7,
+      "user_id": 1,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic2FiaWJvcmhvc2FpbkBnbWFpbC5jb20iLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJpYXQiOjE3OTA1MTM3NzMsImV4cCI6MTc5MTExODU3M30.ceTG0dVxtl7XpH4K21QH5z3A6XjpdvtRsX0TjGbmgIY",
+      "ip_address": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-27T12:56:13.316Z",
+      "created_at": "2026-09-27T12:56:13.316Z"
+    },
+    {
+      "id": 8,
+      "user_id": 2,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWxleC5jb2RlckBkZXZzcGhlcmUuaW8iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc5MDUxNDcyNCwiZXhwIjoxNzkxMTE5NTI0fQ.zMOJJ8wrhstxU9ISJTzb3ACdefBPKkq6cbSkL3YB-ac",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-27T13:12:04.660Z",
+      "created_at": "2026-09-27T13:12:04.660Z"
+    },
+    {
+      "id": 9,
+      "user_id": 2,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWxleC5jb2RlckBkZXZzcGhlcmUuaW8iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc5MDUxNDcyOSwiZXhwIjoxNzkxMTE5NTI5fQ.KfRdmfS9WZ39mWKwIH0nIxgRmO2Y3AmOvEb3NJLkrLM",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-27T13:12:09.584Z",
+      "created_at": "2026-09-27T13:12:09.584Z"
+    },
+    {
+      "id": 10,
+      "user_id": 2,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWxleC5jb2RlckBkZXZzcGhlcmUuaW8iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc5MDUxNDczMywiZXhwIjoxNzkxMTE5NTMzfQ.9whRPLjHKzmh6HbfYqpLdY1rMRbnU_43uJbTm7ntI94",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-27T13:12:13.682Z",
+      "created_at": "2026-09-27T13:12:13.682Z"
+    },
+    {
+      "id": 11,
+      "user_id": 2,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWxleC5jb2RlckBkZXZzcGhlcmUuaW8iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc5MDUxNDc0MSwiZXhwIjoxNzkxMTE5NTQxfQ.kxI4W776RWFnWfvDyQsZyuFhhUQKUT_Vf8xyLn4J480",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-27T13:12:21.806Z",
+      "created_at": "2026-09-27T13:12:21.806Z"
+    },
+    {
+      "id": 12,
+      "user_id": 3,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoic2FyYWguZW5naW5lZXJAZGV2c3BoZXJlLmlvIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3OTA1MTQ3NTgsImV4cCI6MTc5MTExOTU1OH0.t_oFwZeGdshXmvFpqvTq_1ct9wm8PMBJ_yQamNabEjQ",
+      "ip_address": "127.0.0.1",
+      "user_agent": "node",
+      "device_type": "Desktop",
+      "is_active": 1,
+      "last_active_at": "2026-09-27T13:12:38.655Z",
+      "created_at": "2026-09-27T13:12:38.655Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "actor_id": 1,
+      "entity_type": "FRIEND",
+      "entity_id": 1,
+      "message": "Sabibor Hosain accepted your friend request.",
+      "is_read": 0,
+      "created_at": "2026-09-27T13:08:39.864Z"
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "actor_id": 2,
+      "entity_type": "FRIEND",
+      "entity_id": 2,
+      "message": "Alex Vance sent you a friend request.",
+      "is_read": 0,
+      "created_at": "2026-09-27T13:12:21.828Z"
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "actor_id": 3,
+      "entity_type": "FRIEND",
+      "entity_id": 2,
+      "message": "Sarah Connor accepted your friend request.",
+      "is_read": 0,
+      "created_at": "2026-09-27T13:12:38.671Z"
+    }
+  ],
+  "otp_verifications": [],
+  "password_reset_otps": [],
+  "email_verifications": [],
+  "friendships": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "friend_id": 2,
+      "created_at": "2026-09-19T13:53:55.000Z"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "friend_id": 1,
+      "created_at": "2026-09-19T13:53:55.000Z"
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "friend_id": 3,
+      "created_at": "2026-09-27T13:08:40.000Z"
+    },
+    {
+      "id": 4,
+      "user_id": 3,
+      "friend_id": 1,
+      "created_at": "2026-09-27T13:08:40.000Z"
+    },
+    {
+      "id": 5,
+      "user_id": 3,
+      "friend_id": 2,
+      "created_at": "2026-09-27T13:12:38.671Z"
+    },
+    {
+      "id": 6,
+      "user_id": 2,
+      "friend_id": 3,
+      "created_at": "2026-09-27T13:12:38.671Z"
+    }
+  ],
+  "friend_requests": [
+    {
+      "id": 1,
+      "sender_id": 3,
+      "receiver_id": 1,
+      "status": "ACCEPTED",
+      "created_at": "2026-09-26T12:53:55.000Z",
+      "updated_at": "2026-09-27T13:08:39.000Z"
+    },
+    {
+      "id": 2,
+      "sender_id": 2,
+      "receiver_id": 3,
+      "status": "ACCEPTED",
+      "created_at": "2026-09-27T13:12:21.828Z",
+      "updated_at": "2026-09-27T13:12:38.671Z"
+    }
+  ],
+  "blocked_users": [],
+  "conversations": [
+    {
+      "id": 1,
+      "type": "DIRECT",
+      "title": null,
+      "created_at": "2026-09-25T13:53:55.613Z",
+      "updated_at": "2026-09-27T12:56:37.216Z"
+    }
+  ],
+  "conversation_members": [
+    {
+      "id": 1,
+      "conversation_id": 1,
+      "user_id": 1,
+      "joined_at": "2026-09-25T13:53:55.613Z",
+      "last_read_message_id": 3,
+      "last_read_at": "2026-09-27T12:56:37.216Z",
+      "is_muted": 0
+    },
+    {
+      "id": 2,
+      "conversation_id": 1,
+      "user_id": 2,
+      "joined_at": "2026-09-25T13:53:55.613Z",
+      "last_read_message_id": 2,
+      "last_read_at": "2026-09-26T13:53:55.613Z",
+      "is_muted": 0
+    }
+  ],
+  "messages": [
+    {
+      "id": 3,
+      "conversation_id": 1,
+      "sender_id": 1,
+      "message_type": "TEXT",
+      "content": "হাই",
+      "code_language": null,
+      "code_title": null,
+      "parent_id": null,
+      "is_edited": 0,
+      "is_deleted": 0,
+      "created_at": "2026-09-27T12:56:37.000Z",
+      "updated_at": "2026-09-27T12:56:37.000Z"
+    }
+  ],
+  "message_attachments": [],
+  "message_reads": [
+    {
+      "id": 1,
+      "message_id": 1,
+      "user_id": 1,
+      "read_at": "2026-09-26T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "message_id": 2,
+      "user_id": 2,
+      "read_at": "2026-09-26T13:53:55.613Z"
+    }
+  ],
+  "calls": [
+    {
+      "id": 2,
+      "caller_id": 1,
+      "receiver_id": 2,
+      "call_type": "VOICE",
+      "status": "ENDED",
+      "started_at": null,
+      "ended_at": "2026-09-27T12:56:57.000Z",
+      "duration_seconds": 0,
+      "created_at": "2026-09-27T12:56:40.000Z"
+    },
+    {
+      "id": 3,
+      "caller_id": 1,
+      "receiver_id": 2,
+      "call_type": "VIDEO",
+      "status": "ENDED",
+      "started_at": null,
+      "ended_at": "2026-09-27T13:08:12.000Z",
+      "duration_seconds": 0,
+      "created_at": "2026-09-27T13:07:42.000Z"
+    }
+  ],
+  "webrtc_settings": {
+    "stun_server": "stun:stun.l.google.com:19302",
+    "turn_server": "",
+    "turn_username": "",
+    "turn_credential": ""
+  },
+  "groups": [
+    {
+      "id": 1,
+      "name": "System Design & Distributed Architectures",
+      "slug": "system-design-distributed-architectures",
+      "description": "Engineering discussions on microservices, event-driven pipelines, consensus algorithms, and database sharding.",
+      "category": "Architecture",
+      "privacy": "PUBLIC",
+      "avatar_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+      "rules": "1. Respect all members\n2. Share code and architecture diagrams\n3. No spam or self-promotion",
+      "owner_id": 1,
+      "members_count": 24,
+      "posts_count": 3,
+      "created_at": "2026-09-12T13:53:55.613Z",
+      "updated_at": "2026-09-12T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "name": "React 19 & Next.js Core Contributors",
+      "slug": "react-19-nextjs-contributors",
+      "description": "Private research group evaluating React 19 Server Actions, compiler optimizations, and streaming SSR.",
+      "category": "Frontend",
+      "privacy": "PRIVATE",
+      "avatar_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=400&q=80",
+      "cover_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+      "rules": "1. Active contribution required\n2. Confidential discussion",
+      "owner_id": 2,
+      "members_count": 8,
+      "posts_count": 1,
+      "created_at": "2026-09-16T13:53:55.613Z",
+      "updated_at": "2026-09-16T13:53:55.613Z"
+    }
+  ],
+  "group_members": [
+    {
+      "id": 1,
+      "group_id": 1,
+      "user_id": 1,
+      "role": "OWNER",
+      "is_muted": 0,
+      "joined_at": "2026-09-12T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "group_id": 1,
+      "user_id": 2,
+      "role": "ADMIN",
+      "is_muted": 0,
+      "joined_at": "2026-09-13T13:53:55.613Z"
+    },
+    {
+      "id": 3,
+      "group_id": 1,
+      "user_id": 3,
+      "role": "MEMBER",
+      "is_muted": 0,
+      "joined_at": "2026-09-14T13:53:55.613Z"
+    },
+    {
+      "id": 4,
+      "group_id": 2,
+      "user_id": 2,
+      "role": "OWNER",
+      "is_muted": 0,
+      "joined_at": "2026-09-16T13:53:55.613Z"
+    },
+    {
+      "id": 5,
+      "group_id": 2,
+      "user_id": 1,
+      "role": "MEMBER",
+      "is_muted": 0,
+      "joined_at": "2026-09-17T13:53:55.613Z"
+    }
+  ],
+  "group_join_requests": [
+    {
+      "id": 1,
+      "group_id": 2,
+      "user_id": 3,
+      "status": "PENDING",
+      "created_at": "2026-09-26T12:53:55.613Z",
+      "updated_at": "2026-09-26T12:53:55.613Z"
+    }
+  ],
+  "group_bans": [],
+  "group_invites": [],
+  "video_audio_tracks": [
+    {
+      "id": 1,
+      "video_id": 2,
+      "language_name": "Bengali",
+      "language_code": "bn",
+      "title": "বাংলা ধারাভাষ্য (Cloudflare R2 গাইড)",
+      "storage_key": "audio_tracks/video_2_bn.mp3",
+      "audio_url": "https://actions.google.com/sounds/v1/ambiences/daytime_forest_bonfire.ogg",
+      "is_default": 0,
+      "is_active": 1,
+      "created_by": 1,
+      "created_at": "2026-09-25T13:53:55.613Z",
+      "updated_at": "2026-09-25T13:53:55.613Z"
+    },
+    {
+      "id": 2,
+      "video_id": 2,
+      "language_name": "English",
+      "language_code": "en",
+      "title": "English Narration & Deep-Dive",
+      "storage_key": "audio_tracks/video_2_en.mp3",
+      "audio_url": "https://actions.google.com/sounds/v1/science_fiction/alien_hum.ogg",
+      "is_default": 1,
+      "is_active": 1,
+      "created_by": 1,
+      "created_at": "2026-09-25T13:53:55.613Z",
+      "updated_at": "2026-09-25T13:53:55.613Z"
+    },
+    {
+      "id": 3,
+      "video_id": 2,
+      "language_name": "Hindi",
+      "language_code": "hi",
+      "title": "हिन्दी ऑडियो ट्रैक",
+      "storage_key": "audio_tracks/video_2_hi.mp3",
+      "audio_url": "https://actions.google.com/sounds/v1/ambiences/outdoor_festival.ogg",
+      "is_default": 0,
+      "is_active": 1,
+      "created_by": 1,
+      "created_at": "2026-09-25T13:53:55.613Z",
+      "updated_at": "2026-09-25T13:53:55.613Z"
+    }
+  ],
+  "r2_settings": {
+    "account_id": "test_acc_123",
+    "access_key_id": "test_key_456",
+    "secret_access_key": "enc:gcm:e7657c74522620c181715cb900174fcd:3e69533d0b91b6766a9333e919007fcd:ab2e0bbd6c7287fe8d1ea7ec33fd7e038229658bfd111d6b83770c8dfd",
+    "bucket_name": "renamed-media-bucket",
+    "endpoint": "https://test_acc_123.r2.cloudflarestorage.com",
+    "public_url": "https://cdn.example.com",
+    "is_active": 1
+  },
+  "smtp_settings": {
+    "host": "smtp.mailgun.org",
+    "port": 587,
+    "username": "postmaster@example.com",
+    "password": "enc:gcm:82c7b7bc727265828057fb98c65ba741:00c2178d1bb0de3676b3a6aee2c2acf6:fa179e689aa1750436c15a5de7bbca7e92fdf1821d602252",
+    "encryption": "tls",
+    "from_email": "noreply@example.com",
+    "from_name": "Example Social",
+    "is_active": 1
+  },
+  "system_settings": {
+    "site_name": "DevSphere Social",
+    "site_tagline": "The Social Network for Developers & Engineers",
+    "site_description": "Connect, share code blocks, watch reels, and collaborate with tech minds worldwide.",
+    "allow_registration": "1",
+    "email_verification_required": "0",
+    "max_upload_size_mb": "50"
+  }
+}

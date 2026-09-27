@@ -1,0 +1,6 @@
+{
+  "name": "DevSphere Social Platform",
+  "description": "Production-ready full-stack social media platform with coding posts, rich blocks, reels, stories, pages, MySQL persistence, Cloudflare R2 media storage, and admin control.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
