@@ -147,15 +147,15 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated, onSelec
       <div className="p-4 sm:p-5 pb-2 sm:pb-3 flex items-start justify-between">
         <div className="flex items-center space-x-3">
           <img
-            onClick={() => onSelectUser && author?.username && onSelectUser(author.username)}
+            onClick={() => onSelectUser && onSelectUser(author?.username || post.user_id.toString())}
             src={author?.avatar_url || `https://api.dicebear.com/7.x/identicon/svg?seed=${author?.username || 'user'}`}
             alt={author?.username}
-            className="w-10 h-10 rounded-full object-cover cursor-pointer ring-1 ring-slate-200 dark:ring-slate-800"
+            className="w-10 h-10 rounded-full object-cover cursor-pointer ring-1 ring-slate-200 dark:ring-slate-800 hover:ring-2 hover:ring-sky-500/50 transition-all"
           />
           <div>
             <div className="flex items-center flex-wrap gap-1.5">
               <span
-                onClick={() => onSelectUser && author?.username && onSelectUser(author.username)}
+                onClick={() => onSelectUser && onSelectUser(author?.username || post.user_id.toString())}
                 className="font-bold text-sm text-slate-900 dark:text-white cursor-pointer hover:underline"
               >
                 {author?.full_name}
@@ -413,6 +413,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated, onSelec
             postId={post.id}
             initialCommentsCount={commentsCount}
             onCommentsCountChange={setCommentsCount}
+            onSelectUser={onSelectUser}
           />
         </div>
       )}

@@ -1,22 +1,135 @@
 import { Request, Response } from 'express';
-import { getDB, saveMemoryDB } from '../db/index.ts';
+import { getDB, saveMemoryDB, isMySQL, getMySQLPool } from '../db/index.ts';
 
 export async function getUserProfile(req: Request, res: Response): Promise<void> {
   try {
-    const identifier = req.params.username;
     const currentUserId = req.user?.userId;
-    const db = getDB();
+    let rawIdentifier = req.params.username || req.params.id || req.params.userId || (req.query.userId as string);
+    if (!rawIdentifier || rawIdentifier === 'me' || rawIdentifier === 'undefined' || rawIdentifier === 'null') {
+      if (currentUserId) {
+        rawIdentifier = String(currentUserId);
+      } else {
+        res.status(400).json({ success: false, message: 'User identifier required.' });
+        return;
+      }
+    }
+    const identifier = decodeURIComponent(rawIdentifier).trim();
+    const isNum = !isNaN(Number(identifier)) && Number(identifier) > 0;
 
-    const profile = db.user_profiles.find(
-      p => p.username.toLowerCase() === identifier.toLowerCase() || p.user_id.toString() === identifier
-    );
+    let profile: any = null;
+    let userRole: string | undefined = undefined;
+    let userStatus: string | undefined = undefined;
+
+    // 1. If MySQL is connected, query MySQL first
+    if (isMySQL()) {
+      const pool = getMySQLPool();
+      if (pool) {
+        try {
+          let pQuery = 'SELECT * FROM user_profiles WHERE LOWER(username) = LOWER(?)';
+          let pParams: any[] = [identifier];
+          if (isNum) {
+            pQuery = 'SELECT * FROM user_profiles WHERE LOWER(username) = LOWER(?) OR user_id = ? OR id = ?';
+            pParams = [identifier, Number(identifier), Number(identifier)];
+          }
+
+          const [pRows]: any = await pool.query(pQuery, pParams);
+          if (pRows && pRows.length > 0) {
+            profile = pRows[0];
+            const [uRows]: any = await pool.query('SELECT role, status FROM users WHERE id = ?', [profile.user_id]);
+            if (uRows && uRows.length > 0) {
+              userRole = uRows[0].role;
+              userStatus = uRows[0].status;
+            }
+          } else {
+            // Check if user exists in users table by id or email
+            let uQuery = 'SELECT * FROM users WHERE LOWER(email) = LOWER(?)';
+            let uParams: any[] = [identifier];
+            if (isNum) {
+              uQuery = 'SELECT * FROM users WHERE id = ? OR LOWER(email) = LOWER(?)';
+              uParams = [Number(identifier), identifier];
+            }
+            const [uRows]: any = await pool.query(uQuery, uParams);
+            if (uRows && uRows.length > 0) {
+              const u = uRows[0];
+              userRole = u.role;
+              userStatus = u.status;
+              const generatedUsername = u.email.split('@')[0].replace(/[^a-zA-Z0-9_]/g, '_');
+              await pool.query(
+                `INSERT INTO user_profiles (user_id, username, full_name, avatar_url, cover_url, bio, created_at, updated_at)
+                 VALUES (?, ?, ?, ?, NULL, 'DevSphere Engineer', NOW(), NOW())
+                 ON DUPLICATE KEY UPDATE updated_at = NOW()`,
+                [
+                  u.id,
+                  generatedUsername,
+                  generatedUsername.charAt(0).toUpperCase() + generatedUsername.slice(1),
+                  `https://api.dicebear.com/7.x/identicon/svg?seed=${generatedUsername}`
+                ]
+              );
+              const [newPRows]: any = await pool.query('SELECT * FROM user_profiles WHERE user_id = ?', [u.id]);
+              if (newPRows && newPRows.length > 0) {
+                profile = newPRows[0];
+              }
+            }
+          }
+        } catch (dbErr: any) {
+          console.warn('[userController] MySQL query error, falling back to memoryDB:', dbErr.message);
+        }
+      }
+    }
+
+    // 2. Fallback to memoryDB if not found or MySQL disabled
+    if (!profile) {
+      const db = getDB();
+      profile = db.user_profiles.find(
+        p => p.username.toLowerCase() === identifier.toLowerCase() || (isNum && p.user_id === Number(identifier))
+      );
+
+      if (!profile) {
+        // Check if user exists in db.users
+        const u = db.users.find(
+          u => (isNum && u.id === Number(identifier)) || u.email.toLowerCase() === identifier.toLowerCase()
+        );
+        if (u) {
+          const generatedUsername = u.email.split('@')[0].replace(/[^a-zA-Z0-9_]/g, '_');
+          const nextId = db.user_profiles.length ? Math.max(...db.user_profiles.map(p => p.id)) + 1 : 1;
+          profile = {
+            id: nextId,
+            user_id: u.id,
+            username: generatedUsername,
+            full_name: generatedUsername.charAt(0).toUpperCase() + generatedUsername.slice(1),
+            avatar_url: `https://api.dicebear.com/7.x/identicon/svg?seed=${generatedUsername}`,
+            cover_url: null,
+            bio: 'DevSphere Engineer',
+            location: null,
+            website: null,
+            work: null,
+            education: null,
+            gender: null,
+            followers_count: 0,
+            following_count: 0,
+            friends_count: 0,
+            posts_count: 0,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          };
+          db.user_profiles.push(profile);
+          saveMemoryDB();
+          userRole = u.role;
+          userStatus = u.status;
+        }
+      } else {
+        const u = db.users.find(u => u.id === profile.user_id);
+        userRole = u?.role;
+        userStatus = u?.status;
+      }
+    }
 
     if (!profile) {
       res.status(404).json({ success: false, message: 'User profile not found.' });
       return;
     }
 
-    const user = db.users.find(u => u.id === profile.user_id);
+    const db = getDB();
     const isFollowing = currentUserId
       ? db.followers.some(f => f.follower_id === currentUserId && f.following_id === profile.user_id)
       : false;
@@ -42,8 +155,8 @@ export async function getUserProfile(req: Request, res: Response): Promise<void>
       success: true,
       data: {
         profile,
-        userRole: user?.role,
-        userStatus: user?.status,
+        userRole: userRole || 'USER',
+        userStatus: userStatus || 'ACTIVE',
         isFollowing,
         posts: userPosts
       }
@@ -184,6 +297,34 @@ export async function updateProfile(req: Request, res: Response): Promise<void> 
 
     profile.updated_at = new Date().toISOString();
     saveMemoryDB();
+
+    if (isMySQL()) {
+      const pool = getMySQLPool();
+      if (pool) {
+        try {
+          await pool.query(
+            `UPDATE user_profiles
+             SET full_name = ?, bio = ?, location = ?, website = ?, work = ?, education = ?, gender = ?,
+                 avatar_url = COALESCE(?, avatar_url), cover_url = COALESCE(?, cover_url), updated_at = NOW()
+             WHERE user_id = ?`,
+            [
+              fullName ? fullName.trim() : profile.full_name,
+              bio !== undefined ? bio : profile.bio,
+              location !== undefined ? location : profile.location,
+              website !== undefined ? website : profile.website,
+              work !== undefined ? work : profile.work,
+              education !== undefined ? education : profile.education,
+              gender !== undefined ? gender : profile.gender,
+              avatarUrl || null,
+              coverUrl || null,
+              userId
+            ]
+          );
+        } catch (dbErr: any) {
+          console.warn('[userController] MySQL updateProfile warning:', dbErr.message);
+        }
+      }
+    }
 
     res.json({
       success: true,

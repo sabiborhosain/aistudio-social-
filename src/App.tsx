@@ -33,12 +33,51 @@ import {
 function MainApp() {
   const { user, authModal } = useAuth();
 
+  // Helper to parse route from current window.location.pathname
+  const parseCurrentRoute = () => {
+    const path = typeof window !== 'undefined' ? window.location.pathname : '/';
+    const profileMatch = path.match(/^\/(?:profile|u)\/([^/?#]+)/i);
+    if (profileMatch) {
+      const param = decodeURIComponent(profileMatch[1]);
+      return { tab: 'profile' as const, profileParam: param, chatUserId: null };
+    }
+    const messagesMatch = path.match(/^\/(?:messages|chat)(?:\/(\d+))?/i);
+    if (messagesMatch) {
+      const recipientId = messagesMatch[1] ? parseInt(messagesMatch[1]) : null;
+      return { tab: 'messages' as const, profileParam: undefined, chatUserId: recipientId };
+    }
+    if (path.startsWith('/friends')) return { tab: 'friends' as const, profileParam: undefined, chatUserId: null };
+    if (path.startsWith('/groups')) return { tab: 'groups' as const, profileParam: undefined, chatUserId: null };
+    if (path.startsWith('/saved')) return { tab: 'saved' as const, profileParam: undefined, chatUserId: null };
+    if (path.startsWith('/reels')) return { tab: 'reels' as const, profileParam: undefined, chatUserId: null };
+    if (path.startsWith('/videos')) return { tab: 'videos' as const, profileParam: undefined, chatUserId: null };
+    if (path.startsWith('/pages')) return { tab: 'pages' as const, profileParam: undefined, chatUserId: null };
+    if (path.startsWith('/admin')) return { tab: 'admin' as const, profileParam: undefined, chatUserId: null };
+    if (path.startsWith('/profile')) return { tab: 'profile' as const, profileParam: undefined, chatUserId: null };
+    return { tab: 'feed' as const, profileParam: undefined, chatUserId: null };
+  };
+
+  const initialRoute = parseCurrentRoute();
   const [activeTab, setActiveTab] = useState<
     'feed' | 'reels' | 'videos' | 'pages' | 'profile' | 'admin' | 'saved' | 'friends' | 'messages' | 'groups'
-  >('feed');
+  >(initialRoute.tab);
   const [feedFilter, setFeedFilter] = useState<'all' | 'following' | 'code'>('all');
-  const [selectedProfileUsername, setSelectedProfileUsername] = useState<string | undefined>(undefined);
-  const [selectedChatUserId, setSelectedChatUserId] = useState<number | null>(null);
+  const [selectedProfileUsername, setSelectedProfileUsername] = useState<string | undefined>(initialRoute.profileParam);
+  const [selectedChatUserId, setSelectedChatUserId] = useState<number | null>(initialRoute.chatUserId);
+
+  // Sync route on popstate (browser back / forward buttons)
+  useEffect(() => {
+    const handlePopState = () => {
+      const route = parseCurrentRoute();
+      setActiveTab(route.tab);
+      setSelectedProfileUsername(route.profileParam);
+      if (route.chatUserId !== null) {
+        setSelectedChatUserId(route.chatUserId);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Calling state
   const [callState, setCallState] = useState<{
@@ -157,15 +196,50 @@ function MainApp() {
     }
   }, [activeTab, feedFilter]);
 
-  const handleSelectUser = (username: string) => {
-    setSelectedProfileUsername(username);
+  const handleSelectUser = (userParam: string | number) => {
+    const param = String(userParam).trim();
+    setSelectedProfileUsername(param);
     setActiveTab('profile');
+    const newPath = `/profile/${encodeURIComponent(param)}`;
+    if (window.location.pathname !== newPath) {
+      window.history.pushState(null, '', newPath);
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleOpenChatWithUser = (userId: number) => {
     setSelectedChatUserId(userId);
     setActiveTab('messages');
+    const newPath = `/messages/${userId}`;
+    if (window.location.pathname !== newPath) {
+      window.history.pushState(null, '', newPath);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleTabChange = (tab: typeof activeTab) => {
+    setActiveTab(tab);
+    if (tab === 'profile') {
+      const myUsername = user?.profile?.username || (user?.id ? String(user.id) : undefined);
+      if (myUsername) {
+        setSelectedProfileUsername(myUsername);
+        const newPath = `/profile/${encodeURIComponent(myUsername)}`;
+        if (window.location.pathname !== newPath) {
+          window.history.pushState(null, '', newPath);
+        }
+      } else {
+        const newPath = '/profile';
+        if (window.location.pathname !== newPath) {
+          window.history.pushState(null, '', newPath);
+        }
+      }
+    } else {
+      setSelectedProfileUsername(undefined);
+      const newPath = tab === 'feed' ? '/' : `/${tab}`;
+      if (window.location.pathname !== newPath) {
+        window.history.pushState(null, '', newPath);
+      }
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -286,11 +360,7 @@ function MainApp() {
       {/* Top Navbar */}
       <Navbar
         activeTab={activeTab}
-        setActiveTab={tab => {
-          setActiveTab(tab);
-          if (tab !== 'profile') setSelectedProfileUsername(undefined);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
+        setActiveTab={handleTabChange}
         onSelectUser={handleSelectUser}
       />
 
@@ -317,12 +387,10 @@ function MainApp() {
         {/* Left Navigation Sidebar */}
         <Sidebar
           activeTab={activeTab}
-          setActiveTab={tab => {
-            setActiveTab(tab);
-            if (tab !== 'profile') setSelectedProfileUsername(undefined);
-          }}
+          setActiveTab={handleTabChange}
           feedFilter={feedFilter}
           setFeedFilter={setFeedFilter}
+          onSelectUser={handleSelectUser}
         />
 
         {/* Center Main Content Area */}

@@ -9,12 +9,14 @@ interface CommentSectionProps {
   postId: number;
   initialCommentsCount: number;
   onCommentsCountChange?: (count: number) => void;
+  onSelectUser?: (username: string) => void;
 }
 
 export const CommentSection: React.FC<CommentSectionProps> = ({
   postId,
   initialCommentsCount,
-  onCommentsCountChange
+  onCommentsCountChange,
+  onSelectUser
 }) => {
   const { user, authModal } = useAuth();
   const [comments, setComments] = useState<Comment[]>([]);
@@ -147,13 +149,17 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
               {/* Parent Comment */}
               <div className="flex items-start space-x-2.5">
                 <img
+                  onClick={() => onSelectUser && onSelectUser(c.author?.username || c.user_id.toString())}
                   src={c.author?.avatar_url || `https://api.dicebear.com/7.x/identicon/svg?seed=${c.author?.username || 'user'}`}
                   alt=""
-                  className="w-7 h-7 rounded-full object-cover shrink-0 mt-0.5"
+                  className="w-7 h-7 rounded-full object-cover shrink-0 mt-0.5 cursor-pointer hover:ring-2 hover:ring-sky-500/50 transition-all"
                 />
                 <div className="flex-1 min-w-0 bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-2xl border border-slate-100 dark:border-slate-800">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-900 dark:text-white">
+                    <span
+                      onClick={() => onSelectUser && onSelectUser(c.author?.username || c.user_id.toString())}
+                      className="text-xs font-bold text-slate-900 dark:text-white cursor-pointer hover:underline"
+                    >
                       {c.author?.full_name}
                     </span>
                     <span className="text-[10px] text-slate-400">
@@ -212,13 +218,17 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
                     <div key={r.id} className="flex items-start space-x-2">
                       <CornerDownRight className="w-4 h-4 text-slate-400 shrink-0 mt-2" />
                       <img
+                        onClick={() => onSelectUser && onSelectUser(r.author?.username || r.user_id.toString())}
                         src={r.author?.avatar_url || `https://api.dicebear.com/7.x/identicon/svg?seed=${r.author?.username || 'user'}`}
                         alt=""
-                        className="w-6 h-6 rounded-full object-cover shrink-0 mt-0.5"
+                        className="w-6 h-6 rounded-full object-cover shrink-0 mt-0.5 cursor-pointer hover:ring-2 hover:ring-sky-500/50 transition-all"
                       />
                       <div className="flex-1 min-w-0 bg-slate-50/80 dark:bg-slate-800/40 p-2 rounded-xl border border-slate-100 dark:border-slate-800">
                         <div className="flex items-center justify-between">
-                          <span className="text-[11px] font-bold text-slate-900 dark:text-white">
+                          <span
+                            onClick={() => onSelectUser && onSelectUser(r.author?.username || r.user_id.toString())}
+                            className="text-[11px] font-bold text-slate-900 dark:text-white cursor-pointer hover:underline"
+                          >
                             {r.author?.full_name}
                           </span>
                           <span className="text-[9px] text-slate-400">

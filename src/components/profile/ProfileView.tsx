@@ -28,7 +28,7 @@ import { useAuth } from '../../context/AuthContext.tsx';
 import { PostCard } from '../feed/PostCard.tsx';
 
 interface ProfileViewProps {
-  username?: string;
+  username?: string | number;
   onOpenChat?: (userId: number) => void;
   onStartCall?: (userId: number, type: 'VOICE' | 'VIDEO') => void;
   onSelectUser?: (username: string) => void;
@@ -41,13 +41,17 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
   onSelectUser
 }) => {
   const { user, refreshUser, authModal } = useAuth();
-  const targetUsername = username || user?.profile.username;
+  
+  const rawTarget = username !== undefined && username !== null ? String(username).trim() : '';
+  const targetUsername = rawTarget && rawTarget !== 'undefined' && rawTarget !== 'null'
+    ? rawTarget
+    : (user?.profile?.username || (user?.id ? String(user.id) : undefined));
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [activeTab, setActiveTab] = useState<'posts' | 'friends' | 'about'>('posts');
+  const [activeTab, setActiveTab] = useState<'posts' | 'friends' | 'about' | 'media'>('posts');
 
   // Friendship state
   const [friendshipStatus, setFriendshipStatus] = useState<FriendshipStatus>('NONE');
@@ -68,11 +72,37 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
   const [uploading, setUploading] = useState(false);
 
   const fetchProfileData = async () => {
-    if (!targetUsername) return;
+    if (!targetUsername) {
+      if (user?.profile) {
+        setProfile(user.profile);
+        setFullName(user.profile.full_name);
+        setBio(user.profile.bio || '');
+        setLocation(user.profile.location || '');
+        setWork(user.profile.work || '');
+        setEducation(user.profile.education || '');
+        setWebsite(user.profile.website || '');
+      }
+      setLoading(false);
+      return;
+    }
     setLoading(true);
-    const res = await apiRequest<{ profile: UserProfile; posts: Post[]; isFollowing: boolean }>(
-      `/users/profile/${targetUsername}`
+
+    let res = await apiRequest<{ profile: UserProfile; posts: Post[]; isFollowing: boolean }>(
+      `/users/profile/${encodeURIComponent(targetUsername)}`
     );
+
+    if (!res.success || !res.data) {
+      res = await apiRequest<{ profile: UserProfile; posts: Post[]; isFollowing: boolean }>(
+        `/users/${encodeURIComponent(targetUsername)}`
+      );
+    }
+
+    if (!res.success || !res.data) {
+      res = await apiRequest<{ profile: UserProfile; posts: Post[]; isFollowing: boolean }>(
+        `/users/by-id/${encodeURIComponent(targetUsername)}`
+      );
+    }
+
     if (res.success && res.data) {
       setProfile(res.data.profile);
       setPosts(Array.isArray(res.data.posts) ? res.data.posts : []);
@@ -90,6 +120,16 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
       if (user && user.id !== res.data.profile.user_id) {
         fetchFriendshipData(res.data.profile.user_id);
       }
+    } else if (user && (targetUsername === user.profile?.username || targetUsername === String(user.id))) {
+      setProfile(user.profile);
+      setFullName(user.profile.full_name);
+      setBio(user.profile.bio || '');
+      setLocation(user.profile.location || '');
+      setWork(user.profile.work || '');
+      setEducation(user.profile.education || '');
+      setWebsite(user.profile.website || '');
+    } else {
+      setProfile(null);
     }
     setLoading(false);
   };
@@ -570,6 +610,10 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                 <span className="text-slate-500">Posts</span>
               </div>
               <div>
+                <span className="font-bold text-slate-900 dark:text-white">{profile.friends_count || 0}</span>{' '}
+                <span className="text-slate-500">Friends</span>
+              </div>
+              <div>
                 <span className="font-bold text-slate-900 dark:text-white">{profile.followers_count}</span>{' '}
                 <span className="text-slate-500">Followers</span>
               </div>
@@ -582,10 +626,10 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
         </div>
 
         {/* Profile Tabs */}
-        <div className="flex border-t border-slate-100 dark:border-slate-800 px-5 sm:px-8">
+        <div className="flex border-t border-slate-100 dark:border-slate-800 px-5 sm:px-8 overflow-x-auto">
           <button
             onClick={() => setActiveTab('posts')}
-            className={`py-3 px-4 text-xs font-semibold border-b-2 transition-colors ${
+            className={`py-3 px-4 text-xs font-semibold border-b-2 whitespace-nowrap transition-colors ${
               activeTab === 'posts'
                 ? 'border-sky-600 text-sky-600 dark:text-sky-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800'
@@ -595,17 +639,27 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
           </button>
           <button
             onClick={() => setActiveTab('friends')}
-            className={`py-3 px-4 text-xs font-semibold border-b-2 transition-colors ${
+            className={`py-3 px-4 text-xs font-semibold border-b-2 whitespace-nowrap transition-colors ${
               activeTab === 'friends'
                 ? 'border-sky-600 text-sky-600 dark:text-sky-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800'
             }`}
           >
-            Friends
+            Friends ({profile.friends_count || 0})
+          </button>
+          <button
+            onClick={() => setActiveTab('media')}
+            className={`py-3 px-4 text-xs font-semibold border-b-2 whitespace-nowrap transition-colors ${
+              activeTab === 'media'
+                ? 'border-sky-600 text-sky-600 dark:text-sky-400'
+                : 'border-transparent text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            Photos & Videos
           </button>
           <button
             onClick={() => setActiveTab('about')}
-            className={`py-3 px-4 text-xs font-semibold border-b-2 transition-colors ${
+            className={`py-3 px-4 text-xs font-semibold border-b-2 whitespace-nowrap transition-colors ${
               activeTab === 'about'
                 ? 'border-sky-600 text-sky-600 dark:text-sky-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800'
@@ -673,6 +727,48 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {/* MEDIA TAB (PHOTOS & VIDEOS) */}
+      {activeTab === 'media' && (
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-4">Photos & Videos</h3>
+          {(() => {
+            const mediaBlocks: { id: number; url: string; type: 'IMAGE' | 'VIDEO' }[] = [];
+            posts.forEach(p => {
+              p.blocks?.forEach((b: any) => {
+                if (b.block_type === 'IMAGE' && b.content) {
+                  mediaBlocks.push({ id: b.id, url: b.content, type: 'IMAGE' });
+                } else if (b.block_type === 'VIDEO' && b.content) {
+                  mediaBlocks.push({ id: b.id, url: b.content, type: 'VIDEO' });
+                }
+              });
+            });
+
+            if (mediaBlocks.length === 0) {
+              return (
+                <div className="py-12 text-center text-xs text-slate-400">
+                  <Grid className="w-8 h-8 text-slate-300 dark:text-slate-700 mx-auto mb-2" />
+                  <p>No photos or videos uploaded by this engineer yet.</p>
+                </div>
+              );
+            }
+
+            return (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {mediaBlocks.map(m => (
+                  <div key={m.id} className="aspect-square rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 relative group">
+                    {m.type === 'IMAGE' ? (
+                      <img src={m.url} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                    ) : (
+                      <video src={m.url} className="w-full h-full object-cover" controls={false} />
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       )}
 

@@ -4,7 +4,11 @@ import { Page } from '../../types.ts';
 import { apiRequest } from '../../services/api.ts';
 import { useAuth } from '../../context/AuthContext.tsx';
 
-export const PagesView: React.FC = () => {
+interface PagesViewProps {
+  onSelectUser?: (username: string) => void;
+}
+
+export const PagesView: React.FC<PagesViewProps> = ({ onSelectUser: _onSelectUser }) => {
   const { user, authModal } = useAuth();
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);

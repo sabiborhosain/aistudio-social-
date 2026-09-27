@@ -192,7 +192,16 @@ router.post('/pages/:id/follow', requireAuth, toggleFollowPage);
 
 // ===================== USERS & PROFILES =====================
 router.get('/users/search', searchUsers);
+router.get('/users/me/profile', requireAuth, getUserProfile);
+router.get('/users/profile/:username', optionalAuth, getUserProfile);
+router.get('/users/:username/profile', optionalAuth, getUserProfile);
+router.get('/users/by-id/:id', optionalAuth, getUserProfile);
+router.get('/users/id/:id', optionalAuth, getUserProfile);
 router.get('/users/:username', optionalAuth, getUserProfile);
+router.get('/profile/me', requireAuth, getUserProfile);
+router.get('/profile/:username', optionalAuth, getUserProfile);
+router.get('/profile', optionalAuth, getUserProfile);
+router.get('/u/:username', optionalAuth, getUserProfile);
 router.post('/users/:id/follow', requireAuth, toggleFollow);
 router.put('/users/profile', requireAuth, updateProfile);
 router.put('/users/settings', requireAuth, updateSettings);
@@ -228,11 +237,14 @@ router.get('/friends/status/:targetUserId', optionalAuth, getFriendshipStatus);
 router.post('/friends/request/:targetUserId', requireAuth, sendFriendRequest);
 router.post('/friends/requests/:requestId/accept', requireAuth, acceptFriendRequest);
 router.post('/friends/request/:requestId/accept', requireAuth, acceptFriendRequest);
+router.post('/friends/accept/:requestId', requireAuth, acceptFriendRequest);
 router.post('/friends/requests/:requestId/reject', requireAuth, rejectFriendRequest);
 router.post('/friends/request/:requestId/reject', requireAuth, rejectFriendRequest);
+router.post('/friends/reject/:requestId', requireAuth, rejectFriendRequest);
 router.post('/friends/requests/:requestId/cancel', requireAuth, cancelFriendRequest);
 router.post('/friends/request/:targetUserId/cancel', requireAuth, cancelFriendRequest);
 router.delete('/friends/requests/:requestId/cancel', requireAuth, cancelFriendRequest);
+router.delete('/friends/request/:requestId', requireAuth, cancelFriendRequest);
 router.delete('/friends/request/:targetUserId/cancel', requireAuth, cancelFriendRequest);
 router.delete('/friends/:targetUserId', requireAuth, unfriend);
 router.post('/friends/:targetUserId/unfriend', requireAuth, unfriend);
@@ -245,13 +257,18 @@ router.get('/users/blocked/list', requireAuth, getBlockedUsers);
 
 // ===================== PRIVATE MESSAGING =====================
 router.get('/chat/conversations', requireAuth, getConversations);
+router.get('/conversations', requireAuth, getConversations);
 router.post('/chat/conversations', requireAuth, getOrCreateDirectConversation);
+router.post('/conversations', requireAuth, getOrCreateDirectConversation);
 router.post('/chat/conversations/direct/:targetUserId', requireAuth, getOrCreateDirectConversation);
 router.get('/chat/conversations/:id/messages', requireAuth, getMessages);
+router.get('/conversations/:id/messages', requireAuth, getMessages);
 router.post('/chat/conversations/:id/messages', requireAuth, sendMessage);
+router.post('/conversations/:id/messages', requireAuth, sendMessage);
 router.put('/chat/messages/:id', requireAuth, editMessage);
 router.delete('/chat/messages/:id', requireAuth, deleteMessage);
 router.post('/chat/conversations/:id/read', requireAuth, markConversationAsRead);
+router.post('/conversations/:id/read', requireAuth, markConversationAsRead);
 
 // ===================== CALLING & WEBRTC =====================
 router.get('/calls/history', requireAuth, getCallHistory);

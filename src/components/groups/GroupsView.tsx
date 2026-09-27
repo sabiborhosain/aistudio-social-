@@ -568,14 +568,17 @@ export const GroupsView: React.FC<GroupsViewProps> = ({ onSelectUser }) => {
                       key={req.id}
                       className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3"
                     >
-                      <div className="flex items-center space-x-3">
+                      <div
+                        className="flex items-center space-x-3 cursor-pointer"
+                        onClick={() => onSelectUser && req.user?.username && onSelectUser(req.user.username)}
+                      >
                         <img
                           src={req.user?.avatar_url || `https://api.dicebear.com/7.x/identicon/svg?seed=${req.user?.username}`}
                           alt=""
-                          className="w-10 h-10 rounded-full object-cover"
+                          className="w-10 h-10 rounded-full object-cover ring-1 ring-slate-200 dark:ring-slate-700 hover:ring-2 hover:ring-sky-500/50 transition-all"
                         />
                         <div>
-                          <h4 className="font-bold text-xs text-slate-900 dark:text-white">
+                          <h4 className="font-bold text-xs text-slate-900 dark:text-white hover:underline">
                             {req.user?.full_name}
                           </h4>
                           <p className="text-[11px] text-slate-400">@{req.user?.username}</p>

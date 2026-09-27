@@ -152,6 +152,56 @@ export async function getFriendshipStatus(req: Request, res: Response): Promise<
       return;
     }
 
+    // 1. Check MySQL if active
+    if (isMySQL()) {
+      const pool = getMySQLPool();
+      if (pool) {
+        try {
+          const [bRows]: any = await pool.query(
+            'SELECT id FROM blocked_users WHERE (user_id = ? AND blocked_user_id = ?) OR (user_id = ? AND blocked_user_id = ?) LIMIT 1',
+            [currentUserId, targetUserId, targetUserId, currentUserId]
+          );
+          if (bRows && bRows.length > 0) {
+            res.json({ success: true, data: { status: 'BLOCKED' } });
+            return;
+          }
+
+          const [fRows]: any = await pool.query(
+            'SELECT id FROM friendships WHERE user_id = ? AND friend_id = ? LIMIT 1',
+            [currentUserId, targetUserId]
+          );
+          if (fRows && fRows.length > 0) {
+            res.json({ success: true, data: { status: 'FRIENDS' } });
+            return;
+          }
+
+          const [sRows]: any = await pool.query(
+            'SELECT id FROM friend_requests WHERE sender_id = ? AND receiver_id = ? AND status = "PENDING" LIMIT 1',
+            [currentUserId, targetUserId]
+          );
+          if (sRows && sRows.length > 0) {
+            res.json({ success: true, data: { status: 'REQUEST_SENT', requestId: sRows[0].id } });
+            return;
+          }
+
+          const [rRows]: any = await pool.query(
+            'SELECT id FROM friend_requests WHERE sender_id = ? AND receiver_id = ? AND status = "PENDING" LIMIT 1',
+            [targetUserId, currentUserId]
+          );
+          if (rRows && rRows.length > 0) {
+            res.json({ success: true, data: { status: 'REQUEST_RECEIVED', requestId: rRows[0].id } });
+            return;
+          }
+
+          res.json({ success: true, data: { status: 'NONE' } });
+          return;
+        } catch (dbErr: any) {
+          console.warn('[friendController] MySQL getFriendshipStatus warning:', dbErr.message);
+        }
+      }
+    }
+
+    // 2. Fallback to memoryDB
     const db = getDB();
 
     // Check blocked
@@ -478,6 +528,11 @@ export async function cancelFriendRequest(req: Request, res: Response): Promise<
       saveMemoryDB();
       await runMySQL('DELETE FROM friend_requests WHERE id = ?', [removed.id]);
     }
+
+    await runMySQL(
+      'DELETE FROM friend_requests WHERE (id = ? AND (sender_id = ? OR receiver_id = ?)) OR (sender_id = ? AND receiver_id = ? AND status = "PENDING")',
+      [paramId, currentUserId, currentUserId, currentUserId, paramId]
+    );
 
     res.json({ success: true, message: 'Friend request cancelled', status: 'NONE' });
   } catch (err: any) {

@@ -19,13 +19,15 @@ interface SidebarProps {
   setActiveTab: (tab: any) => void;
   feedFilter: 'all' | 'following' | 'code';
   setFeedFilter: (filter: 'all' | 'following' | 'code') => void;
+  onSelectUser?: (username: string) => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   activeTab,
   setActiveTab,
   feedFilter,
-  setFeedFilter
+  setFeedFilter,
+  onSelectUser
 }) => {
   const { user, authModal } = useAuth();
 
@@ -36,7 +38,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* User Card */}
       {user ? (
         <div
-          onClick={() => setActiveTab('profile')}
+          onClick={() => {
+            if (user && onSelectUser) onSelectUser(user.profile.username);
+            setActiveTab('profile');
+          }}
           className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs hover:border-sky-500/50 transition-all cursor-pointer group"
         >
           <div className="flex items-center space-x-3">

@@ -381,7 +381,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onSelec
                           notifications.map(n => (
                             <div
                               key={n.id}
-                              onClick={() => markNotifRead(n.id)}
+                              onClick={() => {
+                                markNotifRead(n.id);
+                                if (onSelectUser && n.actor?.username) {
+                                  onSelectUser(n.actor.username);
+                                  setNotifDropdownOpen(false);
+                                }
+                              }}
                               className={`p-3.5 flex items-start space-x-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors ${
                                 !n.is_read ? 'bg-sky-50/50 dark:bg-sky-950/20' : ''
                               }`}
@@ -439,6 +445,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onSelec
 
                       <button
                         onClick={() => {
+                          if (user && onSelectUser) onSelectUser(user.profile.username);
                           setActiveTab('profile');
                           setProfileDropdownOpen(false);
                         }}
@@ -587,7 +594,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onSelec
         </button>
 
         <button
-          onClick={() => setActiveTab('profile')}
+          onClick={() => {
+            if (user && onSelectUser) onSelectUser(user.profile.username);
+            setActiveTab('profile');
+          }}
           className={`flex flex-col items-center p-1 rounded-xl text-[10px] font-semibold transition-colors ${
             activeTab === 'profile' ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 dark:text-slate-400'
           }`}

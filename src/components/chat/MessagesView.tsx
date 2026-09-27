@@ -318,11 +318,18 @@ export const MessagesView: React.FC<MessagesViewProps> = ({
                         : 'hover:bg-slate-50 dark:hover:bg-slate-800/60'
                     }`}
                   >
-                    <div className="relative shrink-0">
+                    <div
+                      className="relative shrink-0 cursor-pointer"
+                      title="View Profile"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (onSelectUser && partner) onSelectUser(partner.username);
+                      }}
+                    >
                       <img
                         src={partner?.avatar_url || `https://api.dicebear.com/7.x/identicon/svg?seed=${partner?.username || 'user'}`}
                         alt=""
-                        className="w-11 h-11 rounded-full object-cover"
+                        className="w-11 h-11 rounded-full object-cover ring-1 ring-slate-200 dark:ring-slate-700 hover:ring-2 hover:ring-sky-500/50 transition-all"
                       />
                       {partner?.isOnline && (
                         <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900" />
@@ -443,15 +450,25 @@ export const MessagesView: React.FC<MessagesViewProps> = ({
                   return (
                     <div
                       key={msg.id}
-                      className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}
+                      className={`flex ${isMe ? 'justify-end' : 'justify-start items-end space-x-2'}`}
                     >
-                      <div
-                        className={`max-w-md sm:max-w-lg rounded-2xl p-3 text-xs leading-relaxed ${
-                          isMe
-                            ? 'bg-sky-600 text-white rounded-br-xs shadow-xs'
-                            : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-bl-xs border border-slate-200 dark:border-slate-700 shadow-xs'
-                        }`}
-                      >
+                      {!isMe && (
+                        <img
+                          src={otherMember?.avatar_url || `https://api.dicebear.com/7.x/identicon/svg?seed=${otherMember?.username || 'user'}`}
+                          alt=""
+                          onClick={() => onSelectUser && otherMember && onSelectUser(otherMember.username)}
+                          title={`View ${otherMember?.full_name || 'Profile'}`}
+                          className="w-7 h-7 rounded-full object-cover shrink-0 cursor-pointer hover:ring-2 hover:ring-sky-500/50 transition-all mb-1 ring-1 ring-slate-200 dark:ring-slate-700"
+                        />
+                      )}
+                      <div className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
+                        <div
+                          className={`max-w-md sm:max-w-lg rounded-2xl p-3 text-xs leading-relaxed ${
+                            isMe
+                              ? 'bg-sky-600 text-white rounded-br-xs shadow-xs'
+                              : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-bl-xs border border-slate-200 dark:border-slate-700 shadow-xs'
+                          }`}
+                        >
                         {/* Text Content */}
                         {msg.content && <p className="whitespace-pre-line">{msg.content}</p>}
 
@@ -504,7 +521,8 @@ export const MessagesView: React.FC<MessagesViewProps> = ({
                         {isMe && <CheckCheck className="w-3 h-3 text-sky-500" />}
                       </span>
                     </div>
-                  );
+                  </div>
+                );
                 })
               )}
 
